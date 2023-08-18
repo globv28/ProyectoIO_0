@@ -8,6 +8,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <stdio.h>
+#include <string.h>
 
 
 
@@ -18,9 +19,9 @@ GtkWidget *tbdButton1;
 GtkWidget *tbdButton2;
 GtkWidget *tbdButton3;
 GtkWidget *tbdButton4;
+int instancias = 0;
 
 static gboolean on_button_enter(GtkWidget *widget, GdkEvent *event, gpointer user_data) {
-    printf("entra");
     const gchar *tooltip_text = (const gchar *)user_data;
     gtk_widget_set_tooltip_text(widget, tooltip_text);
     return TRUE;
@@ -71,14 +72,40 @@ int main(int argc, char *argv[]){
 
 
 void exit_app(){
-    printf("Exit app \n");
+    //printf("Exit app \n");
     gtk_main_quit(); // command to quit gtk program
 }
 
+char* concat(char* s1, char* s2){
+    char *result = malloc(strlen(s1) + strlen(s2)+1);
+    strcpy(result,s1);
+    strcat(result,s2);
+    return result;
+
+}
+
 void tbd_button_clicked(){
-    printf("Archivo pending ejecutandose");
+    char integerstr[32];
+    sprintf(integerstr,"%d",instancias);
+    const char* comp1 = "gcc -o pending";
+    const char* comp3 = " pendingController.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic -rdynamic";
+    const char* comp2 = concat(comp1, integerstr);
+    char* full = concat(comp2, comp3);
+    char* name = concat("./pending", integerstr);
+    //strcpy(full,comp1);
+    //strcat(comp1, numero);
+    //strcat(full, comp2);
+    //free(full);
+    printf(full);
+    system(full);
+    //char* name = strcat("./pending", numero);
+    system(name);
+    instancias++;
+    
+    //printf("Archivo pending ejecutandose");
 }
 
 void floyd_button_clicked(){
-    printf("Algoritmo de las rutas más cortas ejecutandose");
+    system("./pending");
+    //printf("Algoritmo de las rutas más cortas ejecutandose");
 }
