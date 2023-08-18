@@ -108,7 +108,7 @@ void floyd_button_clicked(){
 /*char integerstr[32];
     sprintf(integerstr,"%d",instancias);
     const char* comp1 = "gcc -o pending";
-    const char* comp3 = " pendingController.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic -rdynamic";
+    const char* comp3 = "gcc -o pending pendingController.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic -rdynamic";
     const char* comp2 = concat(comp1, integerstr);
     char* full = concat(comp2, comp3);
     char* name = concat("./pending", integerstr);
