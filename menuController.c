@@ -11,7 +11,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#define MAX_PROCESSES 100
 
+pid_t process_pids[MAX_PROCESSES];
+int num_processes = 0;
 
 
 //variables
@@ -21,7 +24,8 @@ GtkWidget *tbdButton1;
 GtkWidget *tbdButton2;
 GtkWidget *tbdButton3;
 GtkWidget *tbdButton4;
-int instancias = 0;
+GtkWidget *exit_button;
+GList * windows = NULL;
 
 static gboolean on_button_enter(GtkWidget *widget, GdkEvent *event, gpointer user_data) {
     const gchar *tooltip_text = (const gchar *)user_data;
@@ -50,12 +54,14 @@ int main(int argc, char *argv[]){
     tbdButton2 = GTK_WIDGET(gtk_builder_get_object(builder, "tbd_button2"));
     tbdButton3 = GTK_WIDGET(gtk_builder_get_object(builder, "tbd_button3"));
     tbdButton4 = GTK_WIDGET(gtk_builder_get_object(builder, "tbd_button4"));
+    exit_button = GTK_WIDGET(gtk_builder_get_object(builder, "exit_button"));
     
     g_signal_connect(floydButton, "enter-notify-event", G_CALLBACK(on_button_enter), "Descripción del algoritmo de Floyd");
     g_signal_connect(tbdButton1, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
     g_signal_connect(tbdButton2, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
     g_signal_connect(tbdButton3, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
     g_signal_connect(tbdButton4, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
+    g_signal_connect(exit_button, "enter-notify-event", G_CALLBACK(on_button_enter), "Cierra el menu principal");
 
     
 
@@ -71,11 +77,12 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-
-
 void exit_app(){
     //printf("Exit app \n");
-    gtk_main_quit(); // command to quit gtk program
+    for (int i = 0; i < num_processes; i++) {
+        kill(process_pids[i], SIGTERM);
+    }
+    gtk_main_quit();
 }
 
 char* concat(char* s1, char* s2){
@@ -88,20 +95,22 @@ char* concat(char* s1, char* s2){
 
 void tbd_button_clicked(){
     pid_t pid = fork();
-    if(pid == 0){
-    	system("./pending");
-    	exit(0);
+    if (pid == 0) {
+        system("./pending");
+        exit(0);
+    } else if (pid > 0) {
+        process_pids[num_processes++] = pid;
     }
-    
 }
 
 void floyd_button_clicked(){
     pid_t pid = fork();
-    if(pid == 0){
-    	system("./pending");
-    	exit(0);
+    if (pid == 0) {
+        system("./pending");
+        exit(0);
+    } else if (pid > 0) {
+        process_pids[num_processes++] = pid;
     }
-    
     //printf("Algoritmo de las rutas más cortas ejecutandose");
 }
 

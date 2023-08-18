@@ -110,6 +110,7 @@
             <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="exit_app" swapped="no"/>
+            <signal name="enter-notify-event" handler="on_exit_button_enter_notify_event(&quot;asdsada&quot;)" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
