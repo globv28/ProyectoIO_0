@@ -10,6 +10,7 @@
 #include <stdio.h>
 
 
+
 //variables
 GtkWidget *window;
 GtkWidget *floydButton;
@@ -30,12 +31,16 @@ int main(int argc, char *argv[]){
     GtkBuilder *builder; //GTK builder
     gtk_init(&argc, &argv); //start gtk
 
-
     builder = gtk_builder_new(); //create gtk ui builder
     gtk_builder_add_from_file(builder, "Menu_UI.glade", NULL); //LOAD UI FILE
 
+
+
+    
+
     //ASIGN VARIABLES
     window = GTK_WIDGET(gtk_builder_get_object(builder, "MyWindow")); //load window named MyWindow
+
 
     floydButton = GTK_WIDGET(gtk_builder_get_object(builder, "floyd_button"));
     tbdButton1 = GTK_WIDGET(gtk_builder_get_object(builder, "tbd_button1"));
@@ -49,9 +54,13 @@ int main(int argc, char *argv[]){
     g_signal_connect(tbdButton3, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
     g_signal_connect(tbdButton4, "enter-notify-event", G_CALLBACK(on_button_enter), "Este algoritmo aún no está disponible");
 
+    
+
     //gtk essentials
     gtk_builder_connect_signals(builder, NULL);
     g_object_unref(builder);
+
+
 
     gtk_widget_show_all(window); //show window
     gtk_main(); //run

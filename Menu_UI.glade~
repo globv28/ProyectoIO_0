@@ -23,7 +23,7 @@
         <property name="homogeneous">True</property>
         <child>
           <object class="GtkButton" id="floyd_button">
-            <property name="label" translatable="yes">ALgorimo de caminos más cortos</property>
+            <property name="label" translatable="yes">Algoritmo de camino más corto</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
@@ -192,5 +192,10 @@ Por favor intentelo más tarde.</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-missing-image</property>
   </object>
 </interface>
