@@ -5,6 +5,7 @@
 // ./menu
 
 //Libraries
+
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <stdio.h>
@@ -33,6 +34,27 @@ static gboolean on_button_enter(GtkWidget *widget, GdkEvent *event, gpointer use
     return TRUE;
 }
 
+static void load_css(void){
+    GtkCssProvider *provider;
+    GdkDisplay *display;
+    GdkScreen * screen;
+    
+    const gchar *css_style_file = "styles.css";
+    
+    GFile *css_fp = g_file_new_for_path(css_style_file);
+    
+    GError * error = 0;
+    
+    provider = gtk_css_provider_new();
+    display = gdk_display_get_default();
+    screen = gdk_display_get_default_screen(display);
+    
+    gtk_style_context_add_provider_for_screen(screen,GTK_STYLE_PROVIDER(provider),GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    gtk_css_provider_load_from_file(provider,css_fp,&error);
+    printf("entra");
+    g_object_unref(provider);
+}
+
 //Main
 int main(int argc, char *argv[]){
     GtkBuilder *builder; //GTK builder
@@ -41,12 +63,13 @@ int main(int argc, char *argv[]){
     builder = gtk_builder_new(); //create gtk ui builder
     gtk_builder_add_from_file(builder, "Menu_UI.glade", NULL); //LOAD UI FILE
 
-
+    load_css();
 
     
 
     //ASIGN VARIABLES
     window = GTK_WIDGET(gtk_builder_get_object(builder, "MyWindow")); //load window named MyWindow
+    //window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
 
     floydButton = GTK_WIDGET(gtk_builder_get_object(builder, "floyd_button"));
@@ -68,8 +91,6 @@ int main(int argc, char *argv[]){
     //gtk essentials
     gtk_builder_connect_signals(builder, NULL);
     g_object_unref(builder);
-
-
 
     gtk_widget_show_all(window); //show window
     gtk_main(); //run

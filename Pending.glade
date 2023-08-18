@@ -21,6 +21,7 @@
         <property name="baseline-position">top</property>
         <child>
           <object class="GtkLabel">
+            <property name="name">next_label</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">Este programa aún no ha sido desarrollado</property>
@@ -52,6 +53,7 @@
     </child>
     <child type="titlebar">
       <object class="GtkLabel">
+        <property name="name">top_label</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="label" translatable="yes">Pending</property>

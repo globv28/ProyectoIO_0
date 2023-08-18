@@ -15,6 +15,8 @@
         <property name="can-focus">False</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
+        <property name="margin-start">25</property>
+        <property name="margin-end">25</property>
         <property name="vexpand">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">20</property>
@@ -22,12 +24,11 @@
         <property name="baseline-position">top</property>
         <child>
           <object class="GtkButton" id="floyd_button">
-            <property name="label" translatable="yes">ALgorimo de caminos más cortos</property>
+            <property name="label" translatable="yes">Rutas más cortas</property>
             <property name="visible">True</property>
+            <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
             <signal name="clicked" handler="floyd_button_clicked" swapped="no"/>
           </object>
           <packing>
@@ -40,9 +41,9 @@
           <object class="GtkButton" id="tbd_button1">
             <property name="label" translatable="yes">TBD</property>
             <property name="visible">True</property>
+            <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="tbd_button_clicked" swapped="no"/>
           </object>
@@ -56,9 +57,9 @@
           <object class="GtkButton" id="tbd_button2">
             <property name="label" translatable="yes">TBD</property>
             <property name="visible">True</property>
+            <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="tbd_button_clicked" swapped="no"/>
           </object>
@@ -72,9 +73,9 @@
           <object class="GtkButton" id="tbd_button3">
             <property name="label" translatable="yes">TBD</property>
             <property name="visible">True</property>
+            <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="tbd_button_clicked" swapped="no"/>
           </object>
@@ -88,9 +89,9 @@
           <object class="GtkButton" id="tbd_button4">
             <property name="label" translatable="yes">TBD</property>
             <property name="visible">True</property>
+            <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="tbd_button_clicked" swapped="no"/>
           </object>
@@ -107,10 +108,8 @@
             <property name="app-paintable">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
-            <property name="halign">center</property>
             <property name="valign">center</property>
             <signal name="clicked" handler="exit_app" swapped="no"/>
-            <signal name="enter-notify-event" handler="on_exit_button_enter_notify_event(&quot;asdsada&quot;)" swapped="no"/>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -122,6 +121,7 @@
     </child>
     <child type="titlebar">
       <object class="GtkLabel">
+        <property name="name">top_label</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="label" translatable="yes">Seleccione el botón con el algoritmo que desea ejecutar</property>
