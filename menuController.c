@@ -9,6 +9,8 @@
 #include <gdk/gdk.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 
 
@@ -85,7 +87,25 @@ char* concat(char* s1, char* s2){
 }
 
 void tbd_button_clicked(){
-    char integerstr[32];
+    pid_t pid = fork();
+    if(pid == 0){
+    	system("./pending");
+    	exit(0);
+    }
+    
+}
+
+void floyd_button_clicked(){
+    pid_t pid = fork();
+    if(pid == 0){
+    	system("./pending");
+    	exit(0);
+    }
+    
+    //printf("Algoritmo de las rutas más cortas ejecutandose");
+}
+
+/*char integerstr[32];
     sprintf(integerstr,"%d",instancias);
     const char* comp1 = "gcc -o pending";
     const char* comp3 = " pendingController.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic -rdynamic";
@@ -102,10 +122,4 @@ void tbd_button_clicked(){
     system(name);
     instancias++;
     
-    //printf("Archivo pending ejecutandose");
-}
-
-void floyd_button_clicked(){
-    system("./pending");
-    //printf("Algoritmo de las rutas más cortas ejecutandose");
-}
+    //printf("Archivo pending ejecutandose");*/
